@@ -1,0 +1,4 @@
+* @jgustavoj
+*.js @jgustavoj
+*.yml @jgustavoj
+/public/ @jgustavoj
