@@ -22,13 +22,26 @@ jobs:
         with:
           node-version: "12.x"
       - run: npm ci
-      - run: npm run format:check
+      # npm ci is similar to npm install but its more suitable for ci env 
+      # - run: npm run format:check
       - run: npm test -- --coverage
         env:
           CI: true
+      - name: Upload Test Coverage
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-coverage
+          path: coverage
       - name: Build Project
         if: github.event_name == 'push'
         run: npm run build
+      - name: Upload Build Folder
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-coverage
+          path: build
+      # Deploy to Surge static web hosting
       # - name: Deploy to Staging
       #   if: github.event_name == 'push'
       #   run: npx surge --project ./build --domain
