@@ -23,7 +23,7 @@ jobs:
           node-version: "12.x"
       - run: npm ci
       # npm ci is similar to npm install but its more suitable for ci env 
-      - run: npm run format:check
+      # - run: npm run format:check
       - run: npm test -- --coverage
         env:
           CI: true
